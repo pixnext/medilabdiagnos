@@ -1,0 +1,1120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0284c7" />
+  <meta name="description" content="MediLab Diagnostics offers accurate pathology, radiology, preventive health checkups and home sample collection. NABL Accredited. Book online." />
+  <meta name="keywords" content="Diagnostic Center Near Me, Blood Test Laboratory, Pathology Lab, ECG Near Me, Health Checkup Packages, Home Blood Collection" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://medilab-diagnostics.com" />
+  <meta property="og:title" content="MediLab Diagnostics - Accurate Diagnostics. Trusted Care." />
+  <meta property="og:description" content="Advanced laboratory and diagnostic services with precision, convenience, and compassionate care." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://medilab-diagnostics.com" />
+  
+  <title>MediLab Diagnostics | Accurate Diagnostics. Trusted Care. Faster Results.</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+  <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/gsap.min.js"></script>
+  <script src="https://unpkg.com/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalBusiness",
+    "name": "MediLab Diagnostics",
+    "image": "https://medilab-diagnostics.com/og-image.jpg",
+    "url": "https://medilab-diagnostics.com",
+    "telephone": "+91-98765-43210",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "123 Health Avenue, Block C",
+      "addressLocality": "New Delhi",
+      "postalCode": "110001",
+      "addressCountry": "IN"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": 28.6139,
+      "longitude": 77.2090
+    },
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "07:00",
+      "closes": "21:00"
+    },
+    "priceRange": "₹₹"
+  }
+  </script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #f8fafc; overflow-x: hidden; }
+    .glass { background: rgba(255,255,255,0.75); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.5); }
+    .glass-card { background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.6)); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.6); box-shadow: 0 8px 32px rgba(2,132,199,0.08); }
+    .text-gradient { background-clip: text; -webkit-background-clip: text; color: transparent; background-image: linear-gradient(135deg, #0284c7, #14b8a6); }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    .animate-float { animation: float 6s ease-in-out infinite; }
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-20px)} }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.9s cubic-bezier(0.16,1,0.3,1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    .stroke-animate { stroke-dasharray: 1200; stroke-dashoffset: 1200; animation: draw 3s ease forwards; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #f1f5f9; }
+    ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+ ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script>
+    if ('serviceWorker' in navigator) {
+      const sw = `self.addEventListener('install',e=>self.skipWaiting()); self.addEventListener('activate',e=>e.waitUntil(self.clients.claim())); self.addEventListener('fetch',e=>e.respondWith(fetch(e.request).catch(()=>caches.match(e.request)))));`;
+      navigator.serviceWorker.register(URL.createObjectURL(new Blob([sw], {type:'application/javascript'})));
+      const man = { name:"MediLab Diagnostics", short_name:"MediLab", start_url:".", display:"standalone", background_color:"#ffffff", theme_color:"#0284c7", icons:[] };
+      const manURL = URL.createObjectURL(new Blob([JSON.stringify(man)], {type:'application/json'}));
+      const link = document.createElement('link'); link.rel='manifest'; link.href=manURL; document.head.appendChild(link);
+    }
+  </script>
+
+  <script type="text/babel">
+    const { useState, useEffect, useRef, useCallback } = React;
+
+    /* ---------- UTILITIES ---------- */
+    const useCountUp = (end, duration = 2000, decimals = 0) => {
+      const [val, setVal] = useState(0);
+      const [seen, setSeen] = useState(false);
+      const ref = useRef(null);
+      useEffect(() => {
+        const el = ref.current; if (!el) return;
+        const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) setSeen(true); }, { threshold: 0.4 });
+        obs.observe(el); return () => obs.disconnect();
+      }, []);
+      useEffect(() => {
+        if (!seen) return;
+        let start = 0, t0 = null;
+        const step = (ts) => {
+          if (!t0) t0 = ts;
+          const p = Math.min((ts - t0) / duration, 1);
+          const cur = p * end;
+          start = cur;
+          setVal(decimals ? cur.toFixed(1) : Math.floor(cur));
+          if (p < 1) requestAnimationFrame(step);
+          else setVal(end);
+        };
+        requestAnimationFrame(step);
+      }, [seen, end, duration, decimals]);
+      return { ref, val };
+    };
+
+    const SectionObserver = ({ children }) => {
+      const ref = useRef(null);
+      useEffect(() => {
+        const el = ref.current; if (!el) return;
+        const obs = new IntersectionObserver((entries) => {
+          entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+        }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+        el.querySelectorAll('.reveal').forEach(c => obs.observe(c));
+        return () => obs.disconnect();
+      }, []);
+      return <div ref={ref}>{children}</div>;
+    };
+
+    /* ---------- ICONS ---------- */
+    const Icon = ({ name, className = 'w-6 h-6' }) => {
+      const p = { className, fill: 'none', viewBox: '0 0 24 24', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap:'round', strokeLinejoin:'round' };
+      switch(name){
+        case 'flask': return <svg {...p}><path d="M9.75 3.104v5.714a2.25 2.25 0 01-.407 1.296l-5.223 7.235a2.25 2.25 0 001.816 3.574h12.218a2.25 2.25 0 001.816-3.574l-5.223-7.235a2.25 2.25 0 01-.407-1.296V3.104m-7.5 0a2.25 2.25 0 012.25-2.25h4.5a2.25 2.25 0 012.25 2.25"/></svg>;
+        case 'heart': return <svg {...p}><path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733C11.285 4.901 9.623 3.75 7.688 3.75 5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z"/></svg>;
+        case 'clock': return <svg {...p}><path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>;
+        case 'user': return <svg {...p}><path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z"/></svg>;
+        case 'document': return <svg {...p}><path d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>;
+        case 'shield': return <svg {...p}><path d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 013 9.749c0 5.592 3.824 10.29 9 11.923 5.176-1.633 9-6.33 9-11.922 0-1.33-.199-2.623-.598-3.751a11.959 11.959 0 01-6.402-3.286z"/></svg>;
+ case 'home': return <svg {...p}><path d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>;
+ case 'currency': return <svg {...p}><path d="M12 6v12m-3-2.818.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>;
+        case 'device': return <svg {...p}><path d="M10.5 1.5H8.25A2.25 2.25 0 006 3.75v16.5a2.25 2.25 0 002.25 2.25h7.5A2.25 2.25 0 0018 20.25V3.75a2.25 2.25 0 00-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3"/></svg>;
+ case 'support': return <svg {...p}><path d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 01-.825-.242m9.345-8.334a2.126 2.126 0 00-.476-.095 48.64 48.64 0 00-8.048 0c-1.18.06-2.25.6-2.95 1.466A48.911 48.911 0 003.75 11.25v.375c0 1.587.66 2.982 1.6554.054.217.243.4.507.55.786l-2.077 2.212a.75.75 0 00.55 1.238l2.908.12a6.59 6.59 0 001.92.27c1.527 0 2.988-.354 4.308-1.008.492-.245.9-.558 1.232-.916.457-.479.732-.996.82-1.434a.439.439 0 000-.136l-.011-.073z"/></svg>;
+ case 'phone': return <svg {...p}><path d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.362-.271.527-.733.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>;
+        case 'whatsapp': return <svg {...p}><path d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 1.468.386 2.85 1.06 4.07L2.5 20.5l4.43-.56C8.15 21.614 9.532 22 12 22zM8.75 12.75a.75.75 0 100-1.5.75.75 0 000 1.5zm3 0a.75.75 0 100-1.5.75.75 0 000 1.5zm3 0a.75.75 0 100-1.5.75.75 0 000 1.5z"/></svg>;
+        case 'check': return <svg {...p}><path d="m4.5 12.75 6 6 9-13.5"/></svg>;
+        case 'star': return <svg className={className} fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.293z"/></svg>;
+        case 'chevronDown': return <svg {...p}><path d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>;
+        case 'arrowRight': return <svg {...p}><path d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>;
+        case 'arrowLeft': return <svg {...p}><path d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18"/></svg>;
+        case 'menu': return <svg {...p}><path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"/></svg>;
+        case 'close': return <svg {...p}><path d="M6 18L18 6M6 6l12 12"/></svg>;
+        case 'truck': return <svg {...p}><path d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.134-8.383 17.902 17.902 0 00-8.383-3.134 1.125 1.125 0 00-1.124 1.091V14.25"/></svg>;
+        case 'mapPin': return <svg {...p}><path d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>;
+        case 'mail': return <svg {...p}><path d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>;
+        default: return null;
+      }
+    };
+
+    /* ---------- DATA ---------- */
+    const menuItems = [
+      { id:'home', label:'Home' },
+      { id:'about', label:'About Us' },
+      { id:'services', label:'Services' },
+      { id:'packages', label:'Health Packages' },
+      { id:'booking', label:'Book Appointment' },
+      { id:'home-collection', label:'Home Collection' },
+      { id:'reports', label:'Reports' },
+      { id:'contact', label:'Contact' },
+    ];
+
+    const stats = [
+      { label:'Patients Served', value:50000, suffix:'+' },
+      { label:'Tests Conducted', value:120000, suffix:'+' },
+      { label:'Years Experience', value:15, suffix:'+' },
+      { label:'Accuracy Rate', value:99.9, suffix:'%', decimal:true },
+      { label:'Home Visits', value:25000, suffix:'+' },
+    ];
+
+    const features = [
+      { icon:'shield', title:'NABL Accredited', desc:'Rigorous quality control meeting global benchmarks for reliable diagnostics.' },
+      { icon:'user', title:'Expert Pathologists', desc:'Board-certified pathologists available for consultation and second opinions.' },
+      { icon:'clock', title:'Same-Day Reports', desc:'Advanced automation ensures critical reports are delivered within hours.' },
+      { icon:'home', title:'Home Collection', desc:'Certified phlebotomists collect samples at your home with sterile equipment.' },
+      { icon:'currency', title:'Affordable Pricing', desc:'Transparent packages with no hidden charges and multiple payment options.' },
+      { icon:'document', title:'Digital Reports', desc:'Download secure PDF reports via WhatsApp, email, or patient portal.' },
+      { icon:'device', title:'Modern Equipment', desc:'State-of-the-art analyzers from global leaders like Siemens, Roche & Abbott.' },
+      { icon:'support', title:'24x7 Support', desc:'Round-the-clock helpline for appointments, emergencies and report status.' },
+    ];
+
+    const serviceCategories = [
+      { key:'blood', label:'Blood Tests' },
+      { key:'cardiology', label:'Cardiology' },
+      { key:'imaging', label:'Imaging' },
+      { key:'preventive', label:'Preventive Checkups' },
+    ];
+
+    const services = {
+      blood: ['Complete Blood Count (CBC)','Blood Sugar / Fasting Glucose','HbA1c','Liver Function Test','Kidney Function Test','Lipid Profile','Thyroid Profile','Vitamin D','Vitamin B12','Iron Studies','Electrolytes','Dengue','Malaria','COVID RT-PCR','Typhoid','HIV Screening','Hepatitis B','Pregnancy Test (Beta hCG)','Allergy Profile','Cancer Markers'],
+ cardiology: ['Electrocardiogram (ECG)','Holter Monitoring','Treadmill Test (TMT)'],
+      imaging: ['Digital X-Ray','Ultrasound / USG','Color Doppler','Echocardiography (ECHO)'],
+      preventive: ['Basic Health Checkup','Executive Health Package',"Women's Health Package","Men's Health Package",'Senior Citizen Package','Diabetes Package','Heart Care Package','Thyroid Package'],
+    };
+
+    const packages = [
+      { name:'Basic Health Checkup', tests:35, price:'₹1,999', features:['CBC','Lipid Profile','LFT','KFT','Urine R/M','Blood Sugar F/PP'] },
+      { name:'Executive Health Package', tests:65, price:'₹4,499', features:['Whole Body Checkup','ECG','Chest X-Ray','Thyroid','Vitamin D/B12','Hba1c'] },
+      { name:"Women's Health Package", tests:50, price:'₹3,499', features:['PAP Smear','Mammography','Bone Density','Hormone Panel','Iron Studies','Vitamin D'] },
+      { name:"Men's Health Package", tests:48, price:'₹3,299', features:['PSA','Cardiac Risk','LFT','KFT','Thyroid','Diabetes Screening'] },
+ { name:'Senior Citizen Package', tests:55, price:'₹3,999', features:['Bone Density','Diabetes','Cardiac','Liver','Kidney','Vision Check'] },
+      { name:'Diabetes Package', tests:28, price:'₹1,499', features:['Fasting/PP Sugar','Hba1c','Insulin','C-Peptide','Microalbumin','Kidney Function'] },
+      { name:'Heart Care Package', tests:42, price:'₹2,999', features:['ECG','TMT','ECHO','Lipid Profile','HsCRP','Apo B'] },
+      { name:'Thyroid Package', tests:18, price:'₹1,199', features:['T3','T4','TSH','Anti-TPO','Vitamin D','Calcium'] },
+    ];
+
+    const testimonials = [
+      { name:'Ramesh K.', text:'The home collection service is seamless. Got my reports within 6 hours. Truly professional.', rating:5 },
+      { name:'Priya S.', text:'Cleanest lab I have visited. Staff is courteous and the booking process is very simple online.', rating:5 },
+      { name:'Dr. Anand T.', text:'As a clinician, I trust MediLab for my patients. Accurate results and timely reporting.', rating:4 },
+      { name:'Sunita B.', text:'The executive health package was comprehensive. The dietician follow-up was a great addition.', rating:5 },
+    ];
+
+    const healthTips = [
+      { title:'Diabetes Management', desc:'Monitor blood sugar regularly and manage carbs for stable energy.', color:'bg-sky-50 text-sky-700' },
+      { title:'Heart Health', desc:'30 mins of brisk walking daily can significantly reduce cardiac risk.', color:'bg-rose-50 text-rose-700' },
+      { title:'Preventive Checkups', desc:'Annual full-body screening catches diseases before symptoms arise.', color:'bg-emerald-50 text-emerald-700' },
+      { title:'Nutrition', desc:'Eat a rainbow. Diverse colored vegetables offer unique phytonutrients.', color:'bg-amber-50 text-amber-700' },
+      { title:"Women's Health", desc:'Regular PAP smear and breast exams are non-negotiable after age 30.', color:'bg-fuchsia-50 text-fuchsia-700' },
+      { title:"Children's Health", desc:'Keep vaccination schedules on track and ensure adequate Vitamin D.', color:'bg-indigo-50 text-indigo-700' },
+    ];
+
+    const faqs = [
+      { q:'How do I book an appointment?', a:'You can book online via our website, WhatsApp, or call our 24x7 helpline. Same-day slots are available for most tests.' },
+      { q:'Is fasting required for blood tests?', a:'Fasting is required for Lipid Profile, Fasting Blood Sugar, and some Liver tests. Your booking confirmation will include preparation instructions.' },
+      { q:'How soon will I receive my reports?', a:'Most routine reports are available within 6-24 hours. Specialized tests may take 48-72 hours. You will get an SMS alert.' },
+      { q:'Is home sample collection safe?', a:'Absolutely. Our phlebotomists use single-use sterile needles, wear PPE, and follow WHO guidelines for sample transport.' },
+      { q:'Do you offer corporate tie-ups?', a:'Yes, we design annual health packages for corporate employees with centralized billing and digital report dashboards.' },
+      { q:'How can I download an old report?', a:'Visit the Reports section, enter your Patient ID and registered mobile number to download PDFs securely.' },
+    ];
+
+    const timeline = [
+      { year:'2009', title:'Founded', desc:'Started with a mission to make diagnostics accurate and affordable.' },
+      { year:'2013', title:'NABL Accredited', desc:'Achieved NABL certification for biochemistry and hematology.' },
+      { year:'2017', title:'Expansion', desc:'Launched 5 collection centers and 24x7 emergency lab services.' },
+      { year:'2024', title:'Digital First', desc:'Introduced online booking, home collection app and AI-assisted reporting.' },
+    ];
+
+    /* ---------- 3D HERO SCENE ---------- */
+    const HeroScene = () => {
+      const mountRef = useRef(null);
+      useEffect(() => {
+        const mount = mountRef.current;
+        const w = mount.clientWidth;
+        const h = mount.clientHeight;
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0xf0f9ff, 0.018);
+
+        const camera = new THREE.PerspectiveCamera(60, w / h, 0.1, 100);
+        camera.position.set(0, 0, 9);
+
+        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+        renderer.setSize(w, h);
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        mount.appendChild(renderer.domElement);
+
+        const ambient = new THREE.AmbientLight(0xffffff, 0.5);
+        scene.add(ambient);
+        const dir = new THREE.DirectionalLight(0x38bdf8, 1.2);
+        dir.position.set(6, 8, 6);
+        scene.add(dir);
+        const point = new THREE.PointLight(0x14b8a6, 2, 25);
+        point.position.set(-6, 2, 2);
+        scene.add(point);
+
+        // DNA Helix
+        const dnaGroup = new THREE.Group();
+        const sGeo = new THREE.SphereGeometry(0.16, 16, 16);
+        const blueMat = new THREE.MeshStandardMaterial({ color: 0x0284c7, roughness: 0.2, metalness: 0.7 });
+        const tealMat = new THREE.MeshStandardMaterial({ color: 0x0d9488, roughness: 0.2, metalness: 0.5 });
+        const rungGeo = new THREE.CylinderGeometry(0.03, 0.03, 1.4, 8);
+        const rungMat = new THREE.MeshStandardMaterial({ color: 0x94a3b8, roughness: 0.3, metalness: 0.8 });
+        for (let i=0; i<32; i++){
+          const y = (i-16)*0.38;
+          const a1 = i*0.35; const a2 = a1+Math.PI; const r=1.3;
+          const x1=Math.cos(a1)*r, z1=Math.sin(a1)*r;
+          const x2=Math.cos(a2)*r, z2=Math.sin(a2)*r;
+          const b1=new THREE.Mesh(sGeo, blueMat); b1.position.set(x1,y,z1); dnaGroup.add(b1);
+          const b2=new THREE.Mesh(sGeo, tealMat); b2.position.set(x2,y,z2); dnaGroup.add(b2);
+          const rung=new THREE.Mesh(rungGeo, rungMat); rung.position.set((x1+x2)/2, y, (z1+z2)/2); rung.lookAt(x2,y,z2); dnaGroup.add(rung);
+        }
+        scene.add(dnaGroup);
+
+        // Hologram
+        const holoGeo = new THREE.IcosahedronGeometry(1.4, 1);
+        const holoMat = new THREE.MeshBasicMaterial({ color: 0x2dd4bf, wireframe:true, transparent:true, opacity:0.25 });
+        const holo = new THREE.Mesh(holoGeo, holoMat);
+        holo.position.set(0, 2, -5);
+        scene.add(holo);
+
+        // Blood Cells
+        const bcGeo = new THREE.TorusGeometry(0.3, 0.12, 12, 24);
+        const bcMat = new THREE.MeshStandardMaterial({ color: 0xef4444, roughness: 0.4 });
+        const bcs = [];
+        for(let i=0;i<12;i++){
+          const m = new THREE.Mesh(bcGeo, bcMat);
+          m.position.set((Math.random()-0.5)*14, (Math.random()-0.5)*10, (Math.random()-0.5)*8);
+          m.rotation.set(Math.random()*Math.PI, Math.random()*Math.PI, 0);
+          scene.add(m);
+          bcs.push({ m, s:(Math.random()-0.5)*0.01 });
+        }
+
+        // Medical Cross
+        const cross = new THREE.Group();
+        const barGeo = new THREE.BoxGeometry(0.9, 0.28, 0.28);
+        const barMat = new THREE.MeshStandardMaterial({ color:0xffffff, emissive:0x38bdf8, emissiveIntensity:0.5 });
+        const b1=new THREE.Mesh(barGeo, barMat); const b2=new THREE.Mesh(barGeo, barMat); b2.rotation.z=Math.PI/2;
+        cross.add(b1); cross.add(b2); cross.position.set(4.5, 1.5, -2); scene.add(cross);
+
+        // Microscope (abstract)
+        const scope = new THREE.Group();
+        const metal = new THREE.MeshStandardMaterial({ color:0x94a3b8, roughness:0.2, metalness:0.9 });
+        const base = new THREE.Mesh(new THREE.CylinderGeometry(0.9, 1, 0.2, 32), metal); scope.add(base);
+        const arm = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 2.2, 12), metal); arm.position.set(0.6, 1.1, 0); arm.rotation.z=-0.25; scope.add(arm);
+        const stage = new THREE.Mesh(new THREE.BoxGeometry(0.8, 0.1, 0.8), metal); stage.position.set(0, 0.6, 0); scope.add(stage);
+        scope.position.set(-4.2, -1, -3); scene.add(scope);
+
+        // Test Tubes
+        const tubeGeo = new THREE.CylinderGeometry(0.16, 0.16, 1.3, 16);
+        const tMat1 = new THREE.MeshPhysicalMaterial({ color:0xf59e0b, transparent:true, opacity:0.85, roughness:0.1, transmission:0.3 });
+        const tMat2 = new THREE.MeshPhysicalMaterial({ color:0xec4899, transparent:true, opacity:0.85, roughness:0.1, transmission:0.3 });
+        const t1=new THREE.Mesh(tubeGeo, tMat1); t1.position.set(3.2, -1.8, 1); scene.add(t1);
+        const t2=new THREE.Mesh(tubeGeo, tMat2); t2.position.set(3.8, -2,0.4); scene.add(t2);
+
+        // Particles
+        const pGeo = new THREE.BufferGeometry();
+        const pCount = 900;
+        const pos = new Float32Array(pCount*3);
+        for(let i=0;i<pCount*3;i++) pos[i] = (Math.random()-0.5)*30;
+        pGeo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        const pMat = new THREE.PointsMaterial({ size:0.06, color:0x38bdf8, transparent:true, opacity:0.55 });
+        const particles = new THREE.Points(pGeo, pMat);
+ scene.add(particles);
+
+        let mx=0, my=0;
+        const onMove = (e)=>{ mx=(e.clientX/w)*2-1; my=-(e.clientY/h)*2+1; };
+        window.addEventListener('mousemove', onMove);
+
+        let frame;
+        const animate = () => {
+          frame = requestAnimationFrame(animate);
+          const t = Date.now()*0.001;
+
+ dnaGroup.rotation.y = t*0.25;
+          dnaGroup.position.y = Math.sin(t)*0.25;
+
+          holo.rotation.x = t*0.3; holo.rotation.y = t*0.5;
+
+          cross.rotation.z = Math.sin(t)*0.15;
+
+          bcs.forEach(bc => {
+            bc.m.position.y += bc.s;
+            bc.m.rotation.x += 0.012; bc.m.rotation.y += 0.015;
+            if (bc.m.position.y > 6) bc.m.position.y = -6;
+          });
+
+          t1.rotation.z = Math.sin(t*2)*0.1;
+          t2.rotation.z = Math.cos(t*2)*0.1;
+
+          particles.rotation.y = t*0.04;
+
+          camera.position.x += (mx*1.8 - camera.position.x)*0.04;
+          camera.position.y += (my*1.2 - camera.position.y)*0.04;
+          camera.lookAt(0,0,0);
+
+          renderer.render(scene, camera);
+        };
+        animate();
+
+        const onResize = () => {
+          const nw = mount.clientWidth, nh = mount.clientHeight;
+          camera.aspect = nw/nh; camera.updateProjectionMatrix();
+          renderer.setSize(nw, nh);
+        };
+        window.addEventListener('resize', onResize);
+
+        return () => {
+          window.removeEventListener('mousemove', onMove);
+          window.removeEventListener('resize', onResize);
+          cancelAnimationFrame(frame);
+ mount.removeChild(renderer.domElement);
+          scene.traverse(o=>{ if(o.geometry) o.geometry.dispose(); if(o.material){ if(Array.isArray(o.material)) o.material.forEach(m=>m.dispose()); else o.material.dispose(); } });
+          renderer.dispose();
+        };
+      }, []);
+ return <div ref={mountRef} className="absolute inset-0 z-0" />;
+    };
+
+    /* ---------- MAIN APP ---------- */
+    const App = () => {
+      const [menuOpen, setMenuOpen] = useState(false);
+      const [activeService, setActiveService] = useState('blood');
+      const [booking, setBooking] = useState({ step:1, loading:false, success:null, data:{ name:'', age:'', gender:'Male', mobile:'', email:'', date:'', time:'', service:'', visitType:'center', address:'', notes:'' }});
+      const [reportForm, setReportForm] = useState({ id:'', mobile:'' });
+      const [tIdx, setTIdx] = useState(0);
+      const [openFaq, setOpenFaq] = useState(null);
+      const tipsRef = useRef(null);
+
+      const scrollTo = (id) => { document.getElementById(id)?.scrollIntoView({ behavior:'smooth' }); setMenuOpen(false); };
+
+      const updateBook = (k,v) => setBooking(prev => ({ ...prev, data: { ...prev.data, [k]: v } }));
+      const nextStep = () => setBooking(prev => ({ ...prev, step: prev.step + 1 }));
+      const prevStep = () => setBooking(prev => ({ ...prev, step: prev.step - 1 }));
+
+      const submitBooking = async () => {
+        setBooking(p => ({ ...p, loading: true }));
+        // Simulation of Google Sheets POST await new Promise(r => setTimeout(r, 1200));
+        const id = 'ML-' + Math.floor(Math.random()*900000+100000);
+        setBooking({ ...booking, step:1, loading:false, success:{ id }, data:{ name:'', age:'', gender:'Male', mobile:'', email:'', date:'', time:'', service:'', visitType:'center', address:'', notes:'' }});
+      };
+
+      const downloadReport = () => alert('Reports module will be integrated with your LIS/HIS system.\n\nPatient ID: ' + (reportForm.id || 'N/A'));
+
+      // Auto slide testimonials
+      useEffect(() => { const t=setInterval(()=>setTIdx(i=>(i+1)%testimonials.length), 5000); return ()=>clearInterval(t); }, []);
+
+      // GSAP scroll reveal fallback
+      useEffect(() => {
+        if (window.gsap && window.ScrollTrigger) {
+          gsap.registerPlugin(ScrollTrigger);
+          gsap.utils.toArray('.gsap-reveal').forEach(el => {
+            gsap.from(el, { y:40, opacity:0, duration:0.8, scrollTrigger:{ trigger:el, start:'top 85%' } });
+          });
+        }
+      }, []);
+
+      const canProceed = () => {
+        const d = booking.data;
+        if (booking.step===1) return d.name && d.age && d.mobile && d.email;
+        if (booking.step===2) return d.date && d.time && d.service && d.visitType;
+        if (booking.step===3) return d.visitType==='home' ? !!d.address : true;
+        return true;
+      };
+
+      return (
+        <div className="min-h-screen bg-slate-50 text-slate-800">
+
+ {/* Sticky Nav */}
+          <nav className="fixed top-0 left-0 right-0 z-40 glass border-b border-white/40">
+            <div className="max-w-7xl mx-auto px-4 md:px-6 h-16 flex items-center justify-between">
+              <div className="flex items-center gap-2 cursor-pointer" onClick={()=>scrollTo('home')}>
+                <div className="w-8 h-8 bg-sky-600 rounded-lg flex items-center justify-center text-white font-bold text-lg">M</div>
+                <span className="font-bold text-xl tracking-tight text-slate-900">Medi<span className="text-sky-600">Lab</span></span>
+              </div>
+
+ <div className="hidden lg:flex items-center gap-6 text-sm font-medium text-slate-600">
+                {menuItems.map(m => (
+ <button key={m.id} onClick={()=>scrollTo(m.id)} className="hover:text-sky-600 transition-colors">{m.label}</button>
+                ))}
+              </div>
+
+              <div className="hidden md:flex items-center gap-3">
+                <a href="tel:+919876543210" className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-700 text-sm font-semibold hover:bg-emerald-100 transition">
+                  <Icon name="phone" className="w-4 h-4" /> Call Now
+                </a>
+                <a href="https://wa.me/919876543210?text=Hello%20MediLab" target="_blank" rel="noreferrer" className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-teal-50 text-teal-700 text-sm font-semibold hover:bg-teal-100 transition">
+                  <Icon name="whatsapp" className="w-4 h-4" /> WhatsApp
+                </a>
+              </div>
+
+              <button className="lg:hidden p-2 text-slate-700" onClick={()=>setMenuOpen(true)} aria-label="Open menu">
+                <Icon name="menu" />
+              </button>
+            </div>
+          </nav>
+
+          {/* Mobile Menu */}
+          {menuOpen && (
+            <div className="fixed inset-0 z-50 bg-white/95 backdrop-blur-2xl flex flex-col items-center justify-center gap-6 lg:hidden">
+              <button className="absolute top-4 right-4 p-2" onClick={()=>setMenuOpen(false)}><Icon name="close" className="w-7 h-7"/></button>
+              {menuItems.map(m => <button key={m.id} onClick={()=>scrollTo(m.id)} className="text-xl font-semibold text-slate-800">{m.label}</button>)}
+              <div className="flex gap-4 mt-4">
+                <a href="tel:+919876543210" className="px-5 py-2 rounded-full bg-emerald-500 text-white font-semibold">Call Now</a>
+                <a href="https://wa.me/919876543210" className="px-5 py-2 rounded-full bg-teal-500 text-white font-semibold">WhatsApp</a>
+              </div>
+            </div>
+          )}
+
+          {/* HERO */}
+          <section id="home" className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-sky-50 via-white to-teal-50 pt-16">
+            <HeroScene />
+            <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-10 items-center">
+ <div className="text-center lg:text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-sky-100 text-sky-700 text-xs font-bold uppercase tracking-wider mb-4 gsap-reveal">
+                  <span className="w-2 h-2 rounded-full bg-sky-500 animate-pulse" /> NABL Accredited Laboratory
+                </div>
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-extrabold text-slate-900 leading-tight mb-6 gsap-reveal">
+ Accurate Diagnostics.<br />
+                  <span className="text-gradient">Trusted Care.</span><br />
+                  Faster Results.
+                </h1>
+                <p className="text-lg md:text-xl text-slate-600 mb-8 max-w-xl mx-auto lg:mx-0 gsap-reveal">
+ Advanced laboratory and diagnostic services with precision, convenience, and compassionate care—now at your doorstep.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start gsap-reveal">
+ <button onClick={()=>scrollTo('booking')} className="px-8 py-4 rounded-2xl bg-sky-600 text-white font-bold text-lg shadow-lg shadow-sky-200 hover:bg-sky-700 transition transform hover:-translate-y-1">
+                    Book Appointment
+                  </button>
+                  <button onClick={()=>scrollTo('packages')} className="px-8 py-4 rounded-2xl glass text-sky-700 font-bold text-lg hover:bg-white transition border border-sky-100">
+                    Explore Packages
+                  </button>
+                </div>
+                {/* ECG Line */}
+ <div className="mt-10 w-full gsap-reveal">
+ <svg viewBox="0 0 600 60" className="w-full h-16 opacity-60">
+                    <path d="M0 30 L20 30 L30 5 L40 55 L50 30 L80 30 L90 10 L100 50 L110 30 L600 30" fill="none" stroke="#0ea5e9" strokeWidth="2" className="stroke-animate" />
+                  </svg>
+                </div>
+              </div>
+ <div className="hidden lg:block" /> {/* Spacer for 3D scene breathing room */}
+            </div>
+          </section>
+
+          {/* STATS */}
+          <SectionObserver>
+            <section className="relative z-10 -mt-12 mx-4 md:mx-8 lg:mx-12">
+              <div className="max-w-7xl mx-auto glass-card rounded-3xl p-6 md:p-8 grid grid-cols-2 md:grid-cols-5 gap-6 text-center reveal">
+                {stats.map((s, i) => {
+ const { ref, val } = useCountUp(s.value, 2500, s.decimal);
+                  return (
+ <div key={i} ref={ref} className="flex flex-col items-center">
+                      <div className="text-3xl md:text-4xl font-extrabold text-sky-600">{val}{s.suffix}</div>
+                      <div className="text-xs md:text-sm font-semibold text-slate-500 mt-1 uppercase tracking-wide">{s.label}</div>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+          </SectionObserver>
+
+          {/* WHY CHOOSE US */}
+          <SectionObserver>
+            <section id="about" className="py-20 md:py-28 max-w-7xl mx-auto px-4 md:px-6">
+              <div className="text-center mb-16 reveal">
+                <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">Why Patients Trust <span className="text-sky-600">MediLab</span></h2>
+                <p className="text-slate-500 max-w-2xl mx-auto">We combine cutting-edge technology with compassionate care to deliver a diagnostic experience that is fast, accurate, and effortless.</p>
+              </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {features.map((f,i) => (
+                  <div key={i} className="group glass-card rounded-2xl p-6 hover:shadow-xl transition reveal" style={{ transitionDelay: `${i*80}ms` }}>
+                    <div className="w-12 h-12 rounded-xl bg-sky-50 text-sky-600 flex items-center justify-center mb-4 group-hover:bg-sky-600 group-hover:text-white transition">
+ <Icon name={f.icon} className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-lg font-bold text-slate-900 mb-2">{f.title}</h3>
+                    <p className="text-sm text-slate-600 leading-relaxed">{f.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </SectionObserver>
+
+          {/* ABOUT / TIMELINE */}
+          <SectionObserver>
+            <section id="about-lab" className="py-20 bg-white">
+              <div className="max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-16 items-center">
+                <div className="reveal">
+                  <div className="relative">
+ <div className="absolute inset-0 bg-sky-200 rounded-3xl rotate-3 opacity-20" />
+                    <div className="relative glass-card rounded-3xl p-8 md:p-10 border border-sky-100">
+ <h3 className="text-2xl font-bold text-slate-900 mb-4">Our Journey</h3>
+                      <div className="space-y-8 relative">
+                        <div className="absolute left-3 top-2 bottom-2 w-0.5 bg-sky-100" />
+                        {timeline.map((t,i)=>(
+ <div key={i} className="relative pl-10">
+                            <div className="absolute left-0 top-1 w-6 h-6 rounded-full bg-white border-4 border-sky-500" />
+                            <div className="text-sm font-bold text-sky-600 mb-1">{t.year}</div>
+                            <div className="text-base font-semibold text-slate-900">{t.title}</div>
+                            <div className="text-sm text-slate-500">{t.desc}</div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="reveal">
+ <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Precision Built on <span className="text-teal-500">Trust</span></h2>
+                  <p className="text-slate-600 mb-6 leading-relaxed">From a single laboratory room in 2009 to a networked diagnostics ecosystem, MediLab has always prioritized one thing: <strong>patient safety and report accuracy.</strong></p>
+                  <ul className="space-y-3 mb-8">
+                    {['ISO & NABL Accredited','Zero-error tolerance protocols','AI-assisted reporting','Eco-friendly lab processes'].map((item,i)=>
+ <li key={i} className="flex items-center gap-3 text-slate-700 font-medium"><span className="w-6 h-6 rounded-full bg-teal-50 text-teal-600 flex items-center justify-center"><Icon name="check" className="w-3 h-3"/></span>{item}</li>
+                    )}
+                  </ul>
+                  <button onClick={()=>scrollTo('services')} className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-slate-900 text-white font-semibold hover:bg-slate-800 transition">
+ Explore Our Lab <Icon name="arrowRight" className="w-4 h-4" />
+ </button>
+                </div>
+              </div>
+            </section>
+          </SectionObserver>
+
+          {/* SERVICES */}
+          <SectionObserver>
+            <section id="services" className="py-20 md:py-28 max-w-7xl mx-auto px-4 md:px-6">
+              <div className="text-center mb-12 reveal">
+                <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">Our <span className="text-sky-600">Services</span></h2>
+                <p className="text-slate-500">Comprehensive diagnostics under one roof.</p>
+              </div>
+              <div className="flex flex-wrap justify-center gap-2 mb-10 reveal">
+                {serviceCategories.map(cat => (
+                  <button key={cat.key} onClick={()=>setActiveService(cat.key)} className={`px-5 py-2 rounded-full text-sm font-bold transition ${activeService===cat.key ? 'bg-sky-600 text-white shadow-lg' : 'bg-white text-slate-600 hover:bg-slate-100 border border-slate-200'}`}>
+                    {cat.label}
+ </button>
+                ))}
+              </div>
+
+ <div className="reveal">
+                {activeService === 'blood' && (
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {services.blood.map((s,i)=>(
+ <div key={i} className="glass-card rounded-xl p-4 flex items-center justify-between hover:shadow-md transition">
+                        <span className="text-sm font-semibold text-slate-700">{s}</span>
+                        <button onClick={()=>{ setBooking({...booking, step:2, data:{...booking.data, service:s}}); scrollTo('booking'); }} className="text-xs font-bold text-sky-600 hover:underline whitespace-nowrap ml-3">Book</button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+ {activeService === 'cardiology' && (
+                  <div className="grid md:grid-cols-3 gap-6">
+                    {services.cardiology.map((s,i)=>(
+ <div key={i} className="glass-card rounded-2xl p-6 border-t-4 border-rose-500">
+                        <Icon name="heart" className="w-8 h-8 text-rose-500 mb-3" />
+                        <h4 className="text-lg font-bold text-slate-900 mb-2">{s}</h4>
+                        <p className="text-sm text-slate-500 mb-4">Cardiac screening using high-precision equipment and expert interpretation.</p>
+                        <button onClick={()=>{ setBooking({...booking, step:2, data:{...booking.data, service:s}}); scrollTo('booking'); }} className="text-sm font-bold text-sky-600 hover:text-sky-700">Book Now →</button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {activeService === 'imaging' && (
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {services.imaging.map((s,i)=>(
+                      <div key={i} className="glass-card rounded-2xl p-6 border-t-4 border-amber-500">
+                        <Icon name="device" className="w-8 h-8 text-amber-500 mb-3" />
+                        <h4 className="text-lg font-bold text-slate-900 mb-2">{s}</h4>
+                        <p className="text-sm text-slate-500 mb-4">High-resolution imaging with digital archiving.</p>
+                        <button onClick={()=>{ setBooking({...booking, step:2, data:{...booking.data, service:s}}); scrollTo('booking'); }} className="text-sm font-bold text-sky-600 hover:text-sky-700">Book Now →</button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {activeService === 'preventive' && (
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    {services.preventive.map((s,i)=>(
+                      <div key={i} className="glass-card rounded-2xl p-6 border-t-4 border-teal-500">
+                        <Icon name="check" className="w-8 h-8 text-teal-500 mb-3" />
+                        <h4 className="text-lg font-bold text-slate-900 mb-2">{s}</h4>
+                        <p className="text-sm text-slate-500 mb-4">Tailored screening panels designed by specialists.</p>
+                        <button onClick={()=>{ setBooking({...booking, step:2, data:{...booking.data, service:s}}); scrollTo('booking'); }} className="text-sm font-bold text-sky-600 hover:text-sky-700">Book Now →</button>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </section>
+          </SectionObserver>
+
+          {/* PACKAGES */}
+          <SectionObserver>
+            <section id="packages" className="py-20 bg-gradient-to-b from-sky-50/50 to-transparent">
+              <div className="max-w-7xl mx-auto px-4 md:px-6">
+                <div className="text-center mb-14 reveal">
+                  <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">Popular <span className="text-teal-600">Health Packages</span></h2>
+                  <p className="text-slate-500">Comprehensive checkups designed for every stage of life.</p>
+                </div>
+                <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                  {packages.map((pkg,i)=> (
+                    <div key={i} className="bg-white rounded-3xl p-6 shadow-lg border border-slate-100 hover:shadow-2xl hover:-translate-y-1 transition reveal" style={{ transitionDelay: `${i*60}ms` }}>
+                      <div className="text-xs font-bold text-sky-600 uppercase tracking-wider mb-3">{pkg.tests} Tests Included</div>
+ <h3 className="text-lg font-bold text-slate-900 mb-2">{pkg.name}</h3>
+                      <div className="text-3xl font-extrabold text-slate-900 mb-4">{pkg.price}</div>
+                      <ul className="space-y-2 mb-6">
+                        {pkg.features.map((f,j) => (
+                          <li key={j} className="flex items-center gap-2 text-sm text-slate-600">
+                            <Icon name="check" className="w-3.5 h-3.5 text-teal-500" /> {f}
+                          </li>
+                        ))}
+                      </ul>
+                      <button onClick={()=>scrollTo('booking')} className="w-full py-2.5 rounded-xl bg-slate-900 text-white font-bold text-sm hover:bg-slate-800 transition">Book Package</button>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          </SectionObserver>
+
+          {/* HOME COLLECTION */}
+          <SectionObserver>
+            <section id="home-collection" className="py-20 md:py-28 max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-16 items-center">
+              <div className="reveal">
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">Sample Collection at Your <span className="text-teal-500">Doorstep</span></h2>
+                <p className="text-slate-600 mb-8">Skip the queue. Our certified phlebotomists collect samples safely from your home, office, or hotel.</p>
+                <div className="grid sm:grid-cols-2 gap-5">
+ {[
+                    {icon:'truck', title:'Schedule Online', desc:'Pick a 60-minute slot via WhatsApp or web.'},
+                    {icon:'user', title:'Trained Staff', desc:'PPE-equipped, vaccinated professionals.'},
+                    {icon:'shield', title:'Safe Handling', desc:'Cold-chain logistics for sensitive samples.'},
+                    {icon:'clock', title:'Timely Reports', desc:'Digital reports delivered via SMS & email.'},
+                  ].map((step,i)=>(
+                    <div key={i} className="flex gap-4 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                      <div className="w-10 h-10 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center shrink-0">
+                        <Icon name={step.icon} className="w-5 h-5" />
+                      </div>
+                      <div>
+                        <div className="font-bold text-slate-900 text-sm">{step.title}</div>
+                        <div className="text-xs text-slate-500 mt-0.5">{step.desc}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-8 flex gap-4">
+                  <button onClick={()=>scrollTo('booking')} className="px-6 py-3 rounded-xl bg-sky-600 text-white font-bold hover:bg-sky-700 transition">Book Home Visit</button>
+                  <a href="tel:+919876543210" className="px-6 py-3 rounded-xl bg-white border border-slate-200 text-slate-700 font-bold hover:bg-slate-50 transition">Call Us</a>
+                </div>
+              </div>
+              <div className="relative reveal">
+                <div className="absolute inset-0 bg-teal-200 rounded-3xl rotate-3 opacity-20" />
+ <div className="relative glass-card rounded-3xl p-8 border border-teal-100">
+ <div className="flex items-center gap-4 mb-6">
+                    <div className="w-12 h-12 rounded-full bg-teal-500 text-white flex items-center justify-center">
+ <Icon name="home" className="w-6 h-6" />
+                    </div>
+                    <div>
+ <div className="font-bold text-slate-900">Home Collection</div>
+                      <div className="text-xs text-slate-500">Available7 AM – 9 PM</div>
+                    </div>
+                  </div>
+                  <div className="space-y-3">
+                    <div className="h-2 bg-slate-100 rounded-full overflow-hidden">
+ <div className="h-full w-3/4 bg-teal-500 rounded-full" />
+                    </div>
+                    <div className="flex justify-between text-xs text-slate-500">
+ <span>Booking Received</span>
+                      <span>Phlebotomist Dispatched</span>
+                    </div>
+                  </div>
+                  <div className="mt-6 grid grid-cols-3 gap-3 text-center">
+                    <div className="p-3 rounded-xl bg-teal-50 text-teal-800 font-bold text-xl">30<span className="block text-xs font-medium opacity-70">mins</span></div>
+                    <div className="p-3 rounded-xl bg-sky-50 text-sky-800 font-bold text-xl">100%<span className="block text-xs font-medium opacity-70">Sterile</span></div>
+                    <div className="p-3 rounded-xl bg-indigo-50 text-indigo-800 font-bold text-xl">24<span className="block text-xs font-medium opacity-70">hrs Report</span></div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </SectionObserver>
+
+          {/* BOOKING */}
+          <SectionObserver>
+            <section id="booking" className="py-20 md:py-28 bg-white">
+              <div className="max-w-4xl mx-auto px-4 md:px-6">
+                <div className="text-center mb-10 reveal">
+                  <h2 className="text-3xl md:text-5xl font-bold text-slate-900 mb-4">Book an <span className="text-sky-600">Appointment</span></h2>
+                  <p className="text-slate-500">Get started in less than 2 minutes.</p>
+                </div>
+
+                <div className="bg-white rounded-3xl shadow-2xl border border-slate-100 overflow-hidden reveal">
+                  {/* Step Indicator */}
+                  <div className="flex items-center justify-between px-6 md:px-10 py-6 bg-slate-50 border-b border-slate-100">
+                    {[1,2,3,4].map(s=>(
+                      <div key={s} className="flex flex-col items-center gap-2">
+                        <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${booking.step===s ? 'bg-sky-600 text-white' : booking.step>s ? 'bg-teal-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
+ {booking.step>s ? '✓' : s}
+                        </div>
+                        <span className="hidden md:block text-xs font-semibold text-slate-600 text-center w-20 leading-tight">
+ {s===1?'Personal':s===2?'Appointment':s===3?'Address/Notes':'Confirm'}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="p-6 md:p-10">
+                    {/* Step 1 */}
+                    {booking.step===1 && (
+                      <div className="space-y-5 animate-fade">
+                        <div className="grid md:grid-cols-2 gap-5">
+                          <label className="block">
+                            <span className="text-sm font-bold text-slate-700">Full Name</span>
+                            <input value={booking.data.name} onChange={e=>updateBook('name', e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Enter your name" required />
+                          </label>
+                          <label className="block">
+                            <span className="text-sm font-bold text-slate-700">Age</span>
+                            <input type="number" value={booking.data.age} onChange={e=>updateBook('age', e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Years" required />
+                          </label>
+                        </div>
+                        <div className="grid md:grid-cols-2 gap-5">
+                          <label className="block">
+                            <span className="text-sm font-bold text-slate-700">Gender</span>
+                            <select value={booking.data.gender} onChange={e=>updateBook('gender', e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+ <option>Male</option><option>Female</option><option>Other</option>
+                            </select>
+                          </label>
+                          <label className="block">
+                            <span className="text-sm font-bold text-slate-700">Mobile Number</span>
+                            <input type="tel" value={booking.data.mobile} onChange={e=>updateBook('mobile', e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="+91 98765 43210" required />
+                          </label>
+                        </div>
+                        <label className="block">
+                          <span className="text-sm font-bold text-slate-700">Email Address</span>
+                          <input type="email" value={booking.data.email} onChange={e=>updateBook('email', e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="you@example.com" required />
+                        </label>
+                      </div>
+                    )}
+
+                    {/* Step 2 */}
+                    {booking.step===2 && (
+                      <div className="space-y-5 animate-fade">
+                        <div className="grid md:grid-cols-2 gap-5">
+                          <label className="block">
+                            <span className="text-sm font-bold text-slate-700">Preferred Date</span>
+                            <input type="date" value={booking.data.date} onChange={e=>updateBook('date', e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" required />
+                          </label>
+                          <label className="block">
+                            <span className="text-sm font-bold text-slate-700">Preferred Time</span>
+                            <input type="time" value={booking.data.time} onChange={e=>updateBook('time', e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" required />
+                          </label>
+                        </div>
+                        <label className="block">
+                          <span className="text-sm font-bold text-slate-700">Select Service</span>
+                          <select value={booking.data.service} onChange={e=>updateBook('service', e.target.value)} className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500">
+ <option value="">Choose a service...</option>
+                            {['Complete Blood Count','Lipid Profile','Thyroid Profile','ECG','Ultrasound','Diabetes Package','Executive Health Package','Custom'].map(s=><option key={s}>{s}</option>)}
+                          </select>
+                        </label>
+                        <div className="flex gap-4">
+ <label className={`flex-1 cursor-pointer rounded-xl border p-4 flex items-center gap-3 transition ${booking.data.visitType==='center' ? 'border-sky-500 bg-sky-50' : 'border-slate-200 hover:bg-slate-50'}`}>
+ <input type="radio" name="visitType" className="hidden" checked={booking.data.visitType==='center'} onChange={()=>updateBook('visitType','center')} />
+                            <div className="w-5 h-5 rounded-full border-2 flex items-center justify-center border-sky-500"><div className={`w-2.5 h-2.5 rounded-full ${booking.data.visitType==='center' ? 'bg-sky-500' : 'bg-transparent'}`} /></div>
+                            <span className="text-sm font-bold text-slate-700">Center Visit</span>
+                          </label>
+                          <label className={`flex-1 cursor-pointer rounded-xl border p-4 flex items-center gap-3 transition ${booking.data.visitType==='home' ? 'border-teal-500 bg-teal-50' : 'border-slate-200 hover:bg-slate-50'}`}>
+                            <input type="radio" name="visitType" className="hidden" checked={booking.data.visitType==='home'} onChange={()=>updateBook('visitType','home')} />
+                            <div className="w-5 h-5 rounded-full border-2 flex items-center justify-center border-teal-500"><div className={`w-2.5 h-2.5 rounded-full ${booking.data.visitType==='home' ? 'bg-teal-500' : 'bg-transparent'}`} /></div>
+ <span className="text-sm font-bold text-slate-700">Home Visit</span>
+                          </label>
+                        </div>
+                      </div>
+                    )}
+
+                    {/* Step 3 */}
+                    {booking.step===3 && (
+                      <div className="space-y-5 animate-fade">
+                        {booking.data.visitType==='home' && (
+                          <label className="block">
+                            <span className="text-sm font-bold text-slate-700">Home Address</span>
+                            <textarea value={booking.data.address} onChange={e=>updateBook('address', e.target.value)} rows={3} className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Full address with landmark and PIN code" required={booking.data.visitType==='home'} />
+                          </label>
+                        )}
+                        <label className="block">
+                          <span className="text-sm font-bold text-slate-700">Additional Notes (Optional)</span>
+                          <textarea value={booking.data.notes} onChange={e=>updateBook('notes', e.target.value)} rows={2} className="mt-1 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-sky-500" placeholder="Fasting status, allergies, etc." />
+                        </label>
+                      </div>
+                    )}
+
+                    {/* Step 4 Review */}
+                    {booking.step===4 && (
+                      <div className="space-y-4 animate-fade">
+                        <h3 className="text-lg font-bold text-slate-900 mb-2">Review Details</h3>
+                        <div className="bg-slate-50 rounded-xl p-5 space-y-3 text-sm">
+ <div className="flex justify-between"><span className="text-slate-500">Name</span><span className="font-semibold text-slate-900">{booking.data.name}</span></div>
+                          <div className="flex justify-between"><span className="text-slate-500">Service</span><span className="font-semibold text-slate-900">{booking.data.service || 'Not selected'}</span></div>
+                          <div className="flex justify-between"><span className="text-slate-500">Date & Time</span><span className="font-semibold text-slate-900">{booking.data.date} @ {booking.data.time}</span></div>
+                          <div className="flex justify-between"><span className="text-slate-500">Visit Type</span><span className="font-semibold text-slate-900 capitalize">{booking.data.visitType}</span></div>
+                          {booking.data.visitType==='home' && <div className="flex justify-between"><span className="text-slate-500">Address</span><span className="font-semibold text-slate-900 text-right max-w-xs">{booking.data.address}</span></div>}
+                        </div>
+                        <p className="text-xs text-slate-400">By confirming, you agree to our terms and consent to sample collection procedures.</p>
+                      </div>
+                    )}
+
+                    {/* Footer Buttons */}
+                    <div className="mt-8 flex items-center justify-between">
+ {booking.step>1 ? (
+                        <button onClick={prevStep} className="px-5 py-2.5 rounded-xl border border-slate-200 text-slate-600 font-bold hover:bg-slate-50 transition">Back</button>
+                      ) : <div />}
+                      {booking.step < 4 ? (
+                        <button onClick={nextStep} disabled={!canProceed()} className={`px-6 py-2.5 rounded-xl font-bold text-white transition ${canProceed() ? 'bg-sky-600 hover:bg-sky-700' : 'bg-slate-300'}`}>Next Step</button>
+                      ) : (
+                        <button onClick={submitBooking} disabled={booking.loading} className="px-8 py-3 rounded-xl bg-teal-500 text-white font-bold hover:bg-teal-600 transition flex items-center gap-2">
+                          {booking.loading ? 'Confirming...' : 'Confirm Booking'} {!booking.loading && <Icon name="check" className="w-4 h-4"/>}
+ </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+ {/* Success Modal */}
+ {booking.success && (
+                  <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm px-4">
+                    <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl text-center">
+                      <div className="w-16 h-16 rounded-full bg-teal-50 text-teal-500 flex items-center justify-center mx-auto mb-4">
+                        <Icon name="check" className="w-8 h-8" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-slate-900 mb-2">Appointment Confirmed!</h3>
+                      <p className="text-slate-600 mb-2">Your appointment ID is <strong className="text-sky-600">{booking.success.id}</strong></p>
+                      <p className="text-xs text-slate-500 mb-6">We have sent a confirmation to your mobile number. Our team will contact you shortly.</p>
+                      <button onClick={()=>setBooking({...booking, success:null})} className="w-full py-3 rounded-xl bg-slate-900 text-white font-bold hover:bg-slate-800 transition">Done</button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </section>
+          </SectionObserver>
+
+          {/* REPORTS */}
+          <SectionObserver>
+            <section id="reports" className="py-20 md:py-28 max-w-5xl mx-auto px-4 md:px-6">
+              <div className="glass-card rounded-3xl p-8 md:p-12 text-center border border-teal-100 reveal">
+                <Icon name="document" className="w-12 h-12 text-teal-500 mx-auto mb-4" />
+                <h2 className="text-3xl font-bold text-slate-900 mb-2">Download Your Report</h2>
+                <p className="text-slate-500 mb-8">Enter your credentials to access your diagnostic reports securely.</p>
+                <div className="max-w-md mx-auto grid md:grid-cols-2 gap-4 mb-4">
+                  <input value={reportForm.id} onChange={e=>setReportForm({...reportForm, id:e.target.value})} className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Patient ID" />
+                  <input type="tel" value={reportForm.mobile} onChange={e=>setReportForm({...reportForm, mobile:e.target.value})} className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-teal-500" placeholder="Registered Mobile" />
+ </div>
+                <button onClick={downloadReport} className="px-8 py-3 rounded-xl bg-teal-500 text-white font-bold hover:bg-teal-600 transition">Download Report</button>
+                <p className="text-xs text-slate-400 mt-4">Reports are secured with 256-bit encryption. Contact support if you face issues.</p>
+              </div>
+            </section>
+          </SectionObserver>
+
+          {/* TESTIMONIALS */}
+          <SectionObserver>
+            <section className="py-20 bg-slate-900 text-white">
+              <div className="max-w-7xl mx-auto px-4 md:px-6">
+                <div className="text-center mb-12 reveal">
+                  <h2 className="text-3xl md:text-5xl font-bold mb-4">Patient <span className="text-sky-400">Stories</span></h2>
+                  <p className="text-slate-300">Real experiences from real patients.</p>
+                </div>
+                <div className="relative max-w-3xl mx-auto reveal">
+                  <div className="glass-dark rounded-3xl p-8 md:p-12 border border-white/10 text-center">
+                    <div className="flex justify-center gap-1 mb-4">
+ {[...Array(5)].map((_,i)=><Icon key={i} name="star" className={`w-5 h-5 ${i<testimonials[tIdx].rating ? 'text-amber-400':'text-slate-600'}`} />)}
+                    </div>
+                    <p className="text-lg md:text-xl font-medium leading-relaxed mb-6">"{testimonials[tIdx].text}"</p>
+ <div className="flex items-center justify-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-sky-500 flex items-center justify-center font-bold text-sm">{testimonials[tIdx].name[0]}</div>
+                      <div className="text-left">
+                        <div className="text-sm font-bold">{testimonials[tIdx].name}</div>
+                        <div className="text-xs text-slate-400">Verified Patient</div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="flex justify-center gap-3 mt-6">
+                    <button onClick={()=>setTIdx(i=>(i-1+testimonials.length)%testimonials.length)} className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition"><Icon name="arrowLeft" className="w-4 h-4"/></button>
+                    <button onClick={()=>setTIdx(i=>(i+1)%testimonials.length)} className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition"><Icon name="arrowRight" className="w-4 h-4"/></button>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </SectionObserver>
+
+          {/* HEALTH TIPS */}
+          <SectionObserver>
+            <section className="py-20 md:py-28 max-w-7xl mx-auto px-4 md:px-6">
+              <div className="flex items-end justify-between mb-8 reveal">
+                <div>
+                  <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-2">Health <span className="text-teal-500">Tips</span></h2>
+                  <p className="text-slate-500">Daily habits for a healthier life.</p>
+                </div>
+                <div className="flex gap-2">
+                  <button onClick={()=>tipsRef.current?.scrollBy({ left:-320, behavior:'smooth'})} className="w-10 h-10 rounded-full bg-white border border-slate-200 hover:bg-slate-50 flex items-center justify-center"><Icon name="arrowLeft" className="w-4 h-4"/></button>
+                  <button onClick={()=>tipsRef.current?.scrollBy({ left:320, behavior:'smooth'})} className="w-10 h-10 rounded-full bg-white border border-slate-200 hover:bg-slate-50 flex items-center justify-center"><Icon name="arrowRight" className="w-4 h-4"/></button>
+                </div>
+              </div>
+              <div ref={tipsRef} className="flex gap-5 overflow-x-auto hide-scrollbar pb-4 reveal">
+                {healthTips.map((tip,i)=>(
+                  <div key={i} className="min-w-[260px] md:min-w-[300px] rounded-2xl p-6 border border-slate-100 shadow-sm hover:shadow-md transition bg-white">
+                    <div className={`inline-block px-3 py-1 rounded-full text-xs font-bold mb-3 ${tip.color}`}>{tip.title}</div>
+                    <p className="text-sm text-slate-600 leading-relaxed">{tip.desc}</p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          </SectionObserver>
+
+          {/* FAQ */}
+          <SectionObserver>
+            <section className="py-20 bg-sky-50">
+              <div className="max-w-3xl mx-auto px-4 md:px-6">
+                <div className="text-center mb-12 reveal">
+                  <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-3">Frequently Asked <span className="text-sky-600">Questions</span></h2>
+                  <p className="text-slate-500">Everything you need to know before your visit.</p>
+                </div>
+                <div className="space-y-4 reveal">
+                  {faqs.map((faq,i)=>(
+                    <div key={i} className="bg-white rounded-2xl border border-slate-100 overflow-hidden">
+                      <button onClick={()=>setOpenFaq(openFaq===i?null:i)} className="w-full flex items-center justify-between px-5 py-4 text-left font-semibold text-slate-800">
+                        {faq.q}
+                        <span className={`transition-transform ${openFaq===i?'rotate-180':'rotate-0'}`}><Icon name="chevronDown" className="w-4 h-4" /></span>
+                      </button>
+                      {openFaq===i && (
+                        <div className="px-5 pb-4 text-sm text-slate-600 leading-relaxed border-t border-slate-50 pt-3">
+                          {faq.a}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+          </SectionObserver>
+
+          {/* CONTACT & MAP */}
+          <SectionObserver>
+            <section id="contact" className="py-20 md:py-28 max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-12 items-start">
+              <div className="reveal">
+                <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-6">Get in <span className="text-teal-500">Touch</span></h2>
+                <p className="text-slate-600 mb-8">Have questions or need emergency diagnostics? We are here to help 24x7.</p>
+
+                <div className="space-y-5 mb-8">
+                  <div className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                    <div className="w-10 h-10 rounded-lg bg-sky-50 text-sky-600 flex items-center justify-center shrink-0"><Icon name="mapPin" className="w-5 h-5"/></div>
+                    <div>
+                      <div className="font-bold text-slate-900 text-sm">Address</div>
+                      <div className="text-sm text-slate-500">123 Health Avenue, Block C, Connaught Place, New Delhi - 110001</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                    <div className="w-10 h-10 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0"><Icon name="phone" className="w-5 h-5"/></div>
+                    <div>
+                      <div className="font-bold text-slate-900 text-sm">Phone</div>
+                      <div className="text-sm text-slate-500">+91-98765-43210 (24x7 Helpline)</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
+                    <div className="w-10 h-10 rounded-lg bg-teal-50 text-teal-600 flex items-center justify-center shrink-0"><Icon name="whatsapp" className="w-5 h-5"/></div>
+                    <div>
+                      <div className="font-bold text-slate-900 text-sm">WhatsApp</div>
+                      <div className="text-sm text-slate-500">+91-98765-43210</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-4 p-4 rounded-2xl bg-white border border-slate-100 shadow-sm">
+ <div className="w-10 h-10 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center shrink-0"><Icon name="mail" className="w-5 h-5"/></div>
+                    <div>
+                      <div className="font-bold text-slate-900 text-sm">Email</div>
+                      <div className="text-sm text-slate-500">care@medilab-diagnostics.com</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap gap-3">
+                  <a href="https://www.google.com/maps/dir/?api=1&destination=28.6328,77.2197" target="_blank" rel="noreferrer" className="px-5 py-2.5 rounded-xl bg-sky-600 text-white font-bold text-sm hover:bg-sky-700 transition">Get Directions</a>
+                  <a href="tel:+919876543210" className="px-5 py-2.5 rounded-xl bg-emerald-500 text-white font-bold text-sm hover:bg-emerald-600 transition">Call Now</a>
+                  <a href="https://wa.me/919876543210" className="px-5 py-2.5 rounded-xl bg-teal-500 text-white font-bold text-sm hover:bg-teal-600 transition">WhatsApp</a>
+                </div>
+              </div>
+
+              <div className="w-full h-96 rounded-3xl overflow-hidden border border-slate-200 shadow-lg reveal">
+                <iframe
+                  title="MediLab Location"
+                  src="https://maps.google.com/maps?q=28.6328,77.2197&z=15&output=embed"
+                  className="w-full h-full border-0"
+                  allowFullScreen                  loading="lazy"
+                />
+              </div>
+            </section>
+          </SectionObserver>
+
+          {/* FOOTER */}
+          <footer className="bg-slate-900 text-slate-300 py-12">
+            <div className="max-w-7xl mx-auto px-4 md:px-6 grid md:grid-cols-4 gap-8 mb-8">
+              <div className="col-span-1 md:col-span-2">
+                <div className="flex items-center gap-2 mb-4 text-white">
+                  <div className="w-8 h-8 bg-sky-600 rounded-lg flex items-center justify-center font-bold">M</div>
+                  <span className="font-bold text-xl">MediLab</span>
+                </div>
+                <p className="text-sm text-slate-400 max-w-sm mb-4">Advanced diagnostics with compassion. Trusted by50,000+ patients for accurate, timely and affordable healthcare.</p>
+                <div className="flex gap-3">
+                  <a href="https://wa.me/919876543210" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-teal-500 hover:text-white transition"><Icon name="whatsapp" className="w-4 h-4"/></a>
+                  <a href="tel:+919876543210" className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center hover:bg-emerald-500 hover:text-white transition"><Icon name="phone" className="w-4 h-4"/></a>
+                </div>
+              </div>
+              <div>
+                <div className="font-bold text-white mb-3">Quick Links</div>
+                <ul className="space-y-2 text-sm">
+                  {menuItems.slice(0,6).map(m=> <li key={m.id}><button onClick={()=>scrollTo(m.id)} className="hover:text-sky-400 transition">{m.label}</button></li>)}
+                </ul>
+              </div>
+              <div>
+                <div className="font-bold text-white mb-3">Legal</div>
+                <ul className="space-y-2 text-sm">
+                  <li><span className="cursor-pointer hover:text-sky-400">Privacy Policy</span></li>
+                  <li><span className="cursor-pointer hover:text-sky-400">Terms of Service</span></li>
+                  <li><span className="cursor-pointer hover:text-sky-400">Cookie Policy</span></li>
+                </ul>
+              </div>
+            </div>
+            <div className="max-w-7xl mx-auto px-4 md:px-6 border-t border-white/10 pt-6 text-xs text-slate-500 flex flex-col md:flex-row justify-between items-center gap-2">
+              <span> MediLab Diagnostics. All rights reserved.</span>
+              <span>NABL Accredited | ISO 15189 Compliant</span>
+            </div>
+          </footer>
+
+ {/* Floating WhatsApp */}
+          <a href="https://wa.me/919876543210" target="_blank" rel="noreferrer" className="fixed bottom-6 right-6 z-40 w-14 h-14 rounded-full bg-teal-500 text-white shadow-2xl flex items-center justify-center hover:scale-110 transition">
+ <Icon name="whatsapp" className="w-7 h-7" />
+          </a>
+
+        </div>
+      );
+    };
+
+    const root = ReactDOM.createRoot(document.getElementById('root'));
+    root.render(<App />);
+  </script>
+</body>
+</html>
